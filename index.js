@@ -21,7 +21,7 @@ const cronJob = cron.schedule('*/10 * * * *', () => {
   }).on('error', (error) => {
     console.error('Error pinging the server:', error);
   });
-});
+},{timezone:'Asia/Calcutta'});
 
 
 cronJob.start();
