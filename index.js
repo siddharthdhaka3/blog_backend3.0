@@ -12,7 +12,19 @@ const cookieParser = require('cookie-parser');
 const multer = require('multer');
 const storage = multer.memoryStorage()
 const uploadMiddleware = multer()
+const cron = require('node-cron');
 
+
+const cronJob = cron.schedule('*/10 * * * *', () => {
+  http.get('http://localhost:4000', (res) => {
+    console.log(`Ping sent to the server at: ${new Date()}`);
+  }).on('error', (error) => {
+    console.error('Error pinging the server:', error);
+  });
+});
+
+
+cronJob.start();
 require('dotenv').config();
 
 const fs = require('fs');
